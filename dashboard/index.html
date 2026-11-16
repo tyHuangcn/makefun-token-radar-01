@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Launch Radar — pre-token protocols ranked by implied launch value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="mark">◈</span> LAUNCH RADAR <span class="tag">token-radar-01</span></div>
+  <div class="meta" id="snap-meta">—</div>
+</header>
+
+<main id="view-board">
+  <section class="kpis" id="kpis"></section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h1>The board <span class="sub">every pre-token launch candidate, ranked by implied value</span></h1>
+      <div class="legend"><span class="pill watch">WATCHLIST</span> on the house watchlist &nbsp;·&nbsp; <span class="pill pre">PRE-TOKEN</span> records no token</div>
+    </div>
+    <div class="controls">
+      <input id="q" type="search" placeholder="Search name or slug…" autocomplete="off">
+      <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+      <select id="chain" aria-label="Chain"><option value="">All chains</option></select>
+      <select id="scope" aria-label="Scope">
+        <option value="all">All ranked rows</option>
+        <option value="watchlist">Watchlist only</option>
+        <option value="top100">Top 100</option>
+      </select>
+      <select id="sort" aria-label="Sort by">
+        <option value="rank">Sort: rank</option>
+        <option value="implied">Sort: implied value</option>
+        <option value="tvl">Sort: TVL</option>
+        <option value="change">Sort: 7-day change</option>
+        <option value="age">Sort: age</option>
+      </select>
+    </div>
+    <div class="count" id="count"></div>
+    <div class="table-wrap">
+      <table id="board">
+        <thead><tr>
+          <th data-k="rank">#</th><th data-k="name">Protocol</th><th data-k="category">Category</th>
+          <th data-k="chains">Chains</th><th data-k="tvl" class="num">TVL</th><th data-k="change" class="num">7d</th>
+          <th data-k="age" class="num">Age</th><th data-k="implied" class="num">Implied value</th><th></th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <button class="more" id="more">Show more rows</button>
+  </section>
+
+  <section class="panel" id="live-panel">
+    <div class="panel-head"><h2>Already trading <span class="sub">tokens that exist — shown at the market's own value, never mixed into the launch ranking</span></h2></div>
+    <div class="table-wrap">
+      <table id="live">
+        <thead><tr><th>Protocol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">7d</th></tr></thead>
+        <tbody id="live-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel" id="model-panel">
+    <div class="panel-head"><h2>How the value is worked out <span class="sub">model radar-2 — every number comes from the snapshot, no name is special-cased</span></h2></div>
+    <p class="formula">implied value = TVL × category multiple × growth factor × age factor × chain factor</p>
+    <div class="model-grid" id="model-grid"></div>
+    <p class="note">A protocol records no token when DefiLlama records none for it — that is the record, not proof it has none. Exchanges, bridges, wrapped and staked products and versioned pools are set aside from the ranking by the same rule the watchlist uses; the counts are in the header above. Farm plans give concrete steps with a cost and a time, not slogans. Nothing here predicts whether or when a token is issued.</p>
+  </section>
+</main>
+
+<main id="view-detail" hidden>
+  <button class="back" id="back">← Back to the board</button>
+  <section class="panel" id="detail"></section>
+</main>
+
+<footer>Launch Radar · model radar-2 · data: DefiLlama protocols snapshot, as fetched by the house · implied values are this entry's own claim, never make.fun's.</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
